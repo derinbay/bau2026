@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,10 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class FirstTest {
-    //Prepare the environment
-    //Set the data
-    //Action
-    //Assertion
+
     WebDriver driver;
 
     @BeforeMethod
@@ -27,51 +23,46 @@ public class FirstTest {
 
     @Test
     void testLogo() {
-        //open a browser automated by code (selenium)
-        //open trendyol.com
-        //check the logo
-        //check the url as https://www.trendyol.com/
-        By logo = By.id("logo");
-        WebElement logoElement = driver.findElement(logo);
+        HomePage homePage = new HomePage();
+        WebElement logoElement = homePage.getLogoElement(driver);
         Assert.assertTrue(logoElement.isDisplayed());
     }
 
     @Test
     void testSearch() {
-        //open a browser automated by code (selenium)
-        //go to trendyol
-        //search laptop
-          //searchbox click
-          //type laptop
-          //click search icon
-        //check if there are any results
-        By searchBox = By.className("vQI670rJ");
-        driver.findElement(searchBox)
-                .sendKeys("laptop");
+        HomePage homePage = new HomePage();
+        homePage.closeModal(driver);
+        SearchResultPage searchResultPage = homePage.search(driver);
 
-        By modalCloseButton = By.className("modal-section-close");
-        driver.findElement(modalCloseButton).click();
-
-        By searchIcon = By.className("ft51BU2r");
-        driver.findElement(searchIcon).click();
-
-        By productCard = By.className("product-card");
-        WebElement productCardElement = driver.findElement(productCard);
+        WebElement productCardElement = searchResultPage.getProduct(driver);
         Assert.assertTrue(productCardElement.isDisplayed());
     }
 
     @Test
     void testKadin() {
-        By modalCloseButton = By.className("modal-section-close");
-        driver.findElement(modalCloseButton).click();
+        HomePage homePage = new HomePage();
+        homePage.closeModal(driver);
+        homePage.clickKadinCategory(driver);
+        String cssValue = homePage.getAttribute(driver);
 
-        By tab = By.className("tab-link");
-        driver.findElement(tab).click();
-
-        String cssValue = driver.findElement(tab).getAttribute("class");
         Assert.assertTrue(cssValue.contains("active"));
     }
 
-
     //homework: login scenario
+    @Test
+    public void login() throws InterruptedException {
+        HomePage homePage = new HomePage();
+        homePage.closeModal(driver);
+
+        //user redirecting to login page
+        LoginPage loginPage = homePage.clickLogin(driver);
+        homePage = loginPage.login(driver);
+        String myAccountContainerText = homePage.getMyAccountContainerText(driver);
+
+        Assert.assertEquals(myAccountContainerText, "Hesabım");
+    }
 }
+
+
+   //implement explicitWait methods into webdriver methods
+
