@@ -1,48 +1,55 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
+public class HomePage extends BasePage {
 
-    public WebElement getLogoElement(WebDriver driver) {
-        By logo = By.id("logo");
-        return driver.findElement(logo);
+    By tab = By.className("tab-link");
+    By logo = By.id("logo");
+    By myAccountContainer = By.className("account-user");
+    By searchBox = By.cssSelector("[data-testid=suggestion]");
+    By searchIcon = By.cssSelector("[data-testid=search-icon]");
+    By modalCloseButton = By.className("modal-section-close");
+
+    public HomePage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
-    public LoginPage clickLogin(WebDriver driver) {
-        By myAccountContainer = By.className("account-user");
-        driver.findElement(myAccountContainer).click();
-
-        return new LoginPage();
+    public WebElement getLogoElement() {
+        return findElement(logo);
     }
 
-    public SearchResultPage search(WebDriver driver) {
-        By searchBox = By.className("vQI670rJ");
-        driver.findElement(searchBox)
-                .sendKeys("laptop");
-
-        By searchIcon = By.className("ft51BU2r");
-        driver.findElement(searchIcon).click();
-
-        return new SearchResultPage();
+    public LoginPage clickLogin() {
+        click(myAccountContainer);
+        return new LoginPage(driver, wait);
     }
 
-    public String getMyAccountContainerText(WebDriver driver) {
-        By myAccountContainer = By.className("link-text");
-        return driver.findElement(myAccountContainer).getText();
+    public SearchResultPage search(String searchText) {
+        sendKey(searchBox, searchText);
+        click(searchIcon);
+
+        return new SearchResultPage(driver, wait);
     }
 
-    public void closeModal(WebDriver driver) {
-        By modalCloseButton = By.className("modal-section-close");
-        driver.findElement(modalCloseButton).click();
+    public String getMyAccountContainerText() {
+        return getText(myAccountContainer);
     }
 
-    public void clickKadinCategory(WebDriver driver) {
-        By tab = By.className("tab-link");
-        driver.findElement(tab).click();
+    public void closeModal() {
+        click(modalCloseButton);
     }
 
-    public String getAttribute(WebDriver driver) {
-        return driver.findElement(By.className("tab-link")).getAttribute("class");
+    public void clickKadinCategory() {
+        click(tab);
+    }
+
+    public String getAttribute(String attributeName) {
+        return findElement(tab).getAttribute(attributeName);
+    }
+
+    public void waitUntilPageLoad() {
+        wait.until(ExpectedConditions.urlToBe("https://www.trendyol.com/"));
     }
 }
