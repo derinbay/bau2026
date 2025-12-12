@@ -1,3 +1,9 @@
+package com.trendyol.bau.tests;
+
+import com.trendyol.bau.DataObjects.User;
+import com.trendyol.bau.PageObjects.HomePage;
+import com.trendyol.bau.PageObjects.LoginPage;
+import com.trendyol.bau.PageObjects.SearchResultPage;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;

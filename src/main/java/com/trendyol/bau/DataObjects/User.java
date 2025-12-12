@@ -1,3 +1,5 @@
+package com.trendyol.bau.DataObjects;
+
 public class User {
 
     public String email;

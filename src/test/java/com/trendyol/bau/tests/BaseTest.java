@@ -1,3 +1,5 @@
+package com.trendyol.bau.tests;
+
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
