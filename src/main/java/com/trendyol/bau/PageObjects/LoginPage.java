@@ -17,8 +17,8 @@ public class LoginPage extends BasePage {
 
     public HomePage login(String email, String password) {
         closeCookieAlert();
-        sendKey(emailBox, email);
-        sendKey(passwordBox, password);
+        sendKeys(emailBox, email);
+        sendKeys(passwordBox, password);
         click(submitButton);
 
         return new HomePage(driver, wait);

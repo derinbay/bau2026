@@ -10,22 +10,23 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
-    WebDriver driver;
-    WebDriverWait wait5;
+    static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     WebDriverWait wait10;
-    WebDriverWait wait15;
+
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
 
     @BeforeMethod
     void startUp() {
-        driver = new ChromeDriver();
-        driver.get("https://www.trendyol.com");
-        wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait15 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        driver.set(new ChromeDriver());
+
+        getDriver().get("https://www.trendyol.com");
+        wait10 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
     }
 
     @AfterMethod
     void tearDown() {
-        driver.quit();
+        getDriver().quit();
     }
 }

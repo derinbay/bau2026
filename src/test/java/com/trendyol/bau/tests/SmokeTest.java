@@ -25,15 +25,15 @@ public class SmokeTest extends BaseTest {
 
     @Test
     void testLogo() {
-        HomePage homePage = new HomePage(driver, wait10);
+        HomePage homePage = new HomePage(getDriver(), wait10);
         WebElement logoElement = homePage.getLogoElement();
         assertTrue(logoElement.isDisplayed());
     }
 
     @Test
     void testSearch() {
-        String searchText = "Search";
-        HomePage homePage = new HomePage(driver, wait10);
+        String searchText = "Laptop";
+        HomePage homePage = new HomePage(getDriver(), wait10);
         homePage.closeModal();
         SearchResultPage searchResultPage = homePage.search(searchText);
 
@@ -44,7 +44,7 @@ public class SmokeTest extends BaseTest {
     @Test
     void testKadinTab() {
         String attributeName = "class";
-        HomePage homePage = new HomePage(driver, wait10);
+        HomePage homePage = new HomePage(getDriver(), wait10);
         homePage.closeModal();
         homePage.clickKadinCategory();
 
@@ -56,7 +56,7 @@ public class SmokeTest extends BaseTest {
     public void testLogin() {
         User user = new User("asddasdaasd@dasd.com", "1234qwe");
 
-        HomePage homePage = new HomePage(driver, wait10);
+        HomePage homePage = new HomePage(getDriver(), wait10);
         homePage.closeModal();
 
         LoginPage loginPage = homePage.clickLogin();
@@ -67,6 +67,16 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(myAccountContainerText, "Hesabım");
     }
 
-    //Create suite
-    //Parallel execution
+    //
+    // 1- Rename the classes
+    // 2- Created BasePage class and move
+    // 3- created wait objects
+    // 4- moved all non test methods to page objects and base classes
+    // 5-
+    // *
+
+    // Homework for 19.12.2025
+    // 1- check for impilictlyWait
+    // 2- make explicitylyWait objects thread safe
+    // 3- check response codes
 }

@@ -1,5 +1,6 @@
 package com.trendyol.bau.PageObjects;
 
+import com.google.common.annotations.VisibleForTesting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +30,7 @@ public class HomePage extends BasePage {
     }
 
     public SearchResultPage search(String searchText) {
-        sendKey(searchBox, searchText);
+        sendKeys(searchBox, searchText);
         click(searchIcon);
 
         return new SearchResultPage(driver, wait);

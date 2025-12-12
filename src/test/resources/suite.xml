@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="SmokeTest Suite" verbose="1" parallel="methods">
+  <test name="SmokeTests" >
+    <classes>
+      <class name="com.trendyol.bau.tests.SmokeTest" >
+      </class>
+    </classes>
+  </test>
+</suite>
