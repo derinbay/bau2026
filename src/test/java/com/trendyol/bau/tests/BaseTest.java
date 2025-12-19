@@ -11,18 +11,20 @@ import org.testng.annotations.BeforeMethod;
 public class BaseTest {
 
     static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    WebDriverWait wait10;
+    static ThreadLocal<WebDriverWait> wait = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         return driver.get();
     }
-
+    public static WebDriverWait getWait() {
+        return wait.get();
+    }
     @BeforeMethod
     void startUp() {
         driver.set(new ChromeDriver());
 
         getDriver().get("https://www.trendyol.com");
-        wait10 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.set(new WebDriverWait(getDriver(), Duration.ofSeconds(10)));
     }
 
     @AfterMethod

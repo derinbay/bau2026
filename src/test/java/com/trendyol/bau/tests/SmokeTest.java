@@ -25,7 +25,7 @@ public class SmokeTest extends BaseTest {
 
     @Test
     void testLogo() {
-        HomePage homePage = new HomePage(getDriver(), wait10);
+        HomePage homePage = new HomePage(getDriver(), getWait());
         WebElement logoElement = homePage.getLogoElement();
         assertTrue(logoElement.isDisplayed());
     }
@@ -33,7 +33,7 @@ public class SmokeTest extends BaseTest {
     @Test
     void testSearch() {
         String searchText = "Laptop";
-        HomePage homePage = new HomePage(getDriver(), wait10);
+        HomePage homePage = new HomePage(getDriver(), getWait());
         homePage.closeModal();
         SearchResultPage searchResultPage = homePage.search(searchText);
 
@@ -44,7 +44,7 @@ public class SmokeTest extends BaseTest {
     @Test
     void testKadinTab() {
         String attributeName = "class";
-        HomePage homePage = new HomePage(getDriver(), wait10);
+        HomePage homePage = new HomePage(getDriver(), getWait());
         homePage.closeModal();
         homePage.clickKadinCategory();
 
@@ -56,7 +56,7 @@ public class SmokeTest extends BaseTest {
     public void testLogin() {
         User user = new User("asddasdaasd@dasd.com", "1234qwe");
 
-        HomePage homePage = new HomePage(getDriver(), wait10);
+        HomePage homePage = new HomePage(getDriver(), getWait());
         homePage.closeModal();
 
         LoginPage loginPage = homePage.clickLogin();
