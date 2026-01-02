@@ -16,7 +16,6 @@ public class LoginPage extends BasePage {
     }
 
     public HomePage login(String email, String password) {
-        closeCookieAlert();
         sendKeys(emailBox, email);
         sendKeys(passwordBox, password);
         click(submitButton);
