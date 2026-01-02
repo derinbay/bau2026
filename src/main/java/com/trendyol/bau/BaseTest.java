@@ -1,4 +1,4 @@
-package com.trendyol.bau.tests;
+package com.trendyol.bau;
 
 import java.time.Duration;
 
@@ -17,11 +17,13 @@ public class BaseTest {
     public static WebDriver getDriver() {
         return driver.get();
     }
+
     public static WebDriverWait getWait() {
         return wait.get();
     }
+
     @BeforeMethod
-    void startUp() {
+    public void startUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.addArguments("start-maximized");
@@ -32,7 +34,7 @@ public class BaseTest {
     }
 
     @AfterMethod
-    void tearDown() {
+    public void tearDown() {
         getDriver().quit();
     }
 }

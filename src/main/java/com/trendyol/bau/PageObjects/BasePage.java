@@ -1,10 +1,14 @@
 package com.trendyol.bau.PageObjects;
 
+import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static com.trendyol.bau.BaseTest.getDriver;
 
 public class BasePage {
 
@@ -32,5 +36,20 @@ public class BasePage {
 
     public void sendKeys(By locator, String text) {
         findElement(locator).sendKeys(text);
+    }
+
+    public void switchToNextWindow() {
+        Set<String> allHandles = getDriver().getWindowHandles();
+        String currentWindow = getCurrentWindowHandle();
+
+        for (String handle : allHandles) {
+            if (!handle.equals(currentWindow)) {
+                getDriver().switchTo().window(handle);
+            }
+        }
+    }
+
+    public String getCurrentWindowHandle() {
+        return getDriver().getWindowHandle();
     }
 }

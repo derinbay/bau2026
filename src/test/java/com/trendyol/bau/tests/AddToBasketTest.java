@@ -1,8 +1,13 @@
 package com.trendyol.bau.tests;
 
+import com.trendyol.bau.BaseTest;
 import com.trendyol.bau.DataObjects.User;
+import com.trendyol.bau.PageObjects.CartRecommendationPage;
 import com.trendyol.bau.PageObjects.HomePage;
 import com.trendyol.bau.PageObjects.LoginPage;
+import com.trendyol.bau.PageObjects.ProductDetailPage;
+import com.trendyol.bau.PageObjects.SearchResultPage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AddToBasketTest extends BaseTest {
@@ -23,6 +28,7 @@ public class AddToBasketTest extends BaseTest {
     @Test
     public void testAddToBasket() {
         User user = new User("asddasdaasd@dasd.com", "1234qwe");
+        String searchText = "kitap";
 
         HomePage homePage = new HomePage(getDriver(), getWait());
         homePage.closeModal();
@@ -31,7 +37,13 @@ public class AddToBasketTest extends BaseTest {
         homePage = loginPage.login(user.getEmail(), user.getPassword());
 
         homePage.waitUntilPageLoad();
+        homePage.closeModal();
+        SearchResultPage searchResultPage = homePage.search(searchText);
 
+        ProductDetailPage productDetailPage = searchResultPage.getProductDetailPage();
+        productDetailPage.closeAddressWarning();
+        CartRecommendationPage cartRecommendationPage = productDetailPage.addToCart();
 
+        Assert.assertTrue(cartRecommendationPage.isSuccessfulAddContainerDisplayed());
     }
 }

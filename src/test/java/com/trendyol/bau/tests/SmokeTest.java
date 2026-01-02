@@ -1,5 +1,6 @@
 package com.trendyol.bau.tests;
 
+import com.trendyol.bau.BaseTest;
 import com.trendyol.bau.DataObjects.User;
 import com.trendyol.bau.PageObjects.HomePage;
 import com.trendyol.bau.PageObjects.LoginPage;

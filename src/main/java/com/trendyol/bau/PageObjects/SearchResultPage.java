@@ -16,4 +16,10 @@ public class SearchResultPage extends BasePage {
     public WebElement getProduct() {
         return findElement(productCard);
     }
+
+    public ProductDetailPage getProductDetailPage() {
+        getProduct().click();
+        switchToNextWindow();
+        return new ProductDetailPage(driver, wait);
+    }
 }
